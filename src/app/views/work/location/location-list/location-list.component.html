@@ -1,0 +1,56 @@
+<!--<div class="widget wviolet">-->
+  <!--<div fw-widget-header title="People"></div>-->
+  <!--<div class="widget-content text-center text-info">-->
+
+    <!--<div class="row" style="padding-top: 3.5em">-->
+      <!--<div class="col-md-1">-->
+        <!--<a class="btn btn-info" href="#/assets/new"><span class="glyphicon glyphicon-plus"></span> Create </a>-->
+        <!--&lt;!&ndash;<a class="btn btn-info" ng-show="assets.controlvisibility.canNew" href="#/assets/new"><span class="glyphicon glyphicon-plus"></span> Create </a>&ndash;&gt;-->
+      <!--</div>-->
+      <!--<div class="col-md-10">-->
+        <!--<fw-table-filter></fw-table-filter>-->
+      <!--</div>-->
+      <!--<div class="col-md-1">-->
+        <!--<fw-table-report></fw-table-report>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="row" style="margin-top: 1em">-->
+      <!--<fw-table></fw-table>-->
+    <!--</div>-->
+
+    <!--<div class="col-md-12">-->
+      <!--<fw-table-pagination></fw-table-pagination>-->
+    <!--</div>-->
+
+  <!--</div>-->
+
+  <!--<div class="widget-foot">-->
+    <!--<div class="clearfix"></div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">Panel Heading</div>
+  <div class="panel-body panel-success">
+    <div class="row">
+      <div class="col-md-1">
+        <a class="btn btn-info" href="#/assets/new"><span class="glyphicon glyphicon-plus"></span> Create </a>
+        <!--<a class="btn btn-info" ng-show="assets.controlvisibility.canNew" href="#/assets/new"><span class="glyphicon glyphicon-plus"></span> Create </a>-->
+      </div>
+      <div class="col-md-9">
+        <fw-table-filter></fw-table-filter>
+      </div>
+      <div class="col-md-2">
+        <fw-table-report></fw-table-report>
+      </div>
+    </div>
+    <div class="row">
+      <fw-table [data]="{spec: spec}"></fw-table>
+    </div>
+  </div>
+  <div class="panel-footer">
+      <fw-table-pagination></fw-table-pagination>
+  </div>
+</div>

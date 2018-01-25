@@ -1,0 +1,15 @@
+
+
+
+<span [ngSwitch]="specs.control">
+  <fw-text *ngSwitchCase="'text'" [data]="{value:value, class:specs.class, format: specs.format, valueFunc: specs.valueFunc, item: specs.item, clickFunction: specs.clickFunction}"></fw-text>
+
+  <fw-number *ngSwitchCase="'number'" [data]="{value:value, currency: specs.isCurrency, class: specs.class, format: specs.format, clickFunction: specs.clickFunction, item: specs.item}"></fw-number>
+
+  <fw-icon *ngSwitchCase="'textarea'" [data]="value"></fw-icon>
+
+  <fw-video *ngSwitchCase="'video'" [data]="value"></fw-video>
+
+  <fw-date *ngSwitchCase="'date'" [data]="{value:value, class: specs.class, format: specs.format, clickFunction: specs.clickFunction, item: specs.item}"></fw-date>
+
+</span>

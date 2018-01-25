@@ -1,0 +1,31 @@
+
+<div class="col-md-12">
+  <table *ngIf="data && data.spec && value" id="theTable" class="table table-condensed table-striped table-bordered">
+
+    <thead>
+      <tr>
+        <!-- fields header -->
+        <th class="text-center" [hidden]="data.spec[key].invisible" *ngFor="let key of specKeys" (click)="data.spec[key].isSortable && setOrderByField(key)"><b>{{ data.spec[key].caption || key }}</b>
+          <i *ngIf="data.spec[key].isSortable" class="glyphicon" [ngClass]="{'glyphicon-sort': (orderByField !== key), 'glyphicon-sort-by-alphabet': (orderByField === key) && isAcending,  'glyphicon-sort-by-alphabet-alt': (orderByField === key) && !isAcending}"></i>
+        </th>
+        <!-- /fields-header -->
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let item of value; let currentIndex=index;">
+     <!-- table-record -->
+     <tr (click)="select(item, currentIndex)" class="record-row text-center" >
+       <!-- record fields -->
+       <td [hidden]="data.spec[key].invisible" class="data" *ngFor="let key of specKeys;">
+         <fw-table-cell [value]=item[key] [specs]=data.spec[key]></fw-table-cell>
+       </td>
+       <!-- /record fields -->
+     </tr>
+     <!-- /record's sub-table -->
+    </tbody>
+
+  </table>
+  <p *ngIf="!(data && data.spec && value)">
+    There is no data to display or wrong data config
+  </p>
+</div>

@@ -1,0 +1,123 @@
+<form [formGroup]="theFormGroup" (ngSubmit)="onSubmit()">
+
+  <div class="container-fluid">
+  <ng-template ngFor let-key [ngForOf]="specKeys" >
+
+    <div [ngSwitch]="data.spec[key].control">
+
+        <!-- textbox -->
+        <div  *ngSwitchCase="'textbox'" [class]="data.spec[key].class ||'form-group col-xs-12 col-sm-6 col-md-4 col-lg-3'" [ngClass]="{'has-error': theFormGroup.get(key).errors && theFormGroup.get(key).touched}">
+          <label for={{key}}>{{data.spec[key].label}}</label>
+          <span *ngIf='theFormGroup.get(key).errors && theFormGroup.get(key).errors["required"] && theFormGroup.get(key).touched' class="text-danger">*</span>
+          <input type="text"
+                 id={{key}}
+                 formControlName={{key}}
+                 placeholder={{data.spec[key].placeholder||key}}
+                 class="form-control"/>
+           <span
+            *ngIf='theFormGroup.get(key).errors && theFormGroup.get(key).errors["required"] && theFormGroup.get(key).touched'
+             class="help-block">{{data.spec[key].label}} is required</span>
+          <span
+            *ngIf='theFormGroup.get(key).errors && theFormGroup.get(key).errors["email"] && theFormGroup.get(key).touched'
+            class="help-block">{{data.spec[key].label}} is not valid email</span>
+        </div>
+      <!-- end-textbox -->
+
+      <!-- start-radio-->
+      <div *ngSwitchCase="'radio'" [class]="data.spec[key].class ||'form-group col-xs-12 col-sm-6 col-md-4 col-lg-3'" [ngClass]="{'has-error': theFormGroup.get(key).errors && theFormGroup.get(key).touched}">
+        <label class="radio-inline" *ngFor="let optionItem of data.spec[key].optionList">
+          <input type="radio"
+                 formControlName={{key}}
+                 [value]="optionItem.key">{{optionItem.name}}
+        </label>
+       </div>
+       <!--  end-radio -->
+
+      <!-- start-dropdown-->
+      <div *ngSwitchCase="'dropdown'"  [class]="data.spec[key].class ||'form-group col-xs-12 col-sm-6 col-md-4 col-lg-3'" [ngClass]="{'has-error': theFormGroup.get(key).errors && theFormGroup.get(key).touched}">
+        <label for={{key}}>{{data.spec[key].label}}</label>
+        <span *ngIf='theFormGroup.get(key).errors && theFormGroup.get(key).errors["required"] && theFormGroup.get(key).touched' class="text-danger">*</span>
+        <select id={{key}} formControlName={{key}} class="form-control">
+          <option *ngFor="let optionItem of data.spec[key].optionList" value={{optionItem.key}}>
+            {{optionItem.name}}
+          </option>
+        </select>
+      </div>
+       <!-- end-dropdown -->
+
+      <!-- start-checkbox-->
+      <div class="checkbox" *ngSwitchCase="'checkbox'" [class]="data.spec[key].class ||'form-group col-xs-12 col-sm-6 col-md-4 col-lg-3'" [ngClass]="{'has-error': theFormGroup.get(key).errors && theFormGroup.get(key).touched}">
+        <label><input type="checkbox" formControlName={{key}}>{{data.spec[key].label}}</label>
+      </div>
+      <!--  end-checkbox -->
+
+      <!-- textarea -->
+      <div  *ngSwitchCase="'textarea'" [class]="data.spec[key].class ||'form-group col-xs-12 col-sm-6 col-md-4 col-lg-3'" [ngClass]="{'has-error': theFormGroup.get(key).errors && theFormGroup.get(key).touched}">
+        <label for={{key}}>{{data.spec[key].label}}</label>
+        <span *ngIf='theFormGroup.get(key).errors && theFormGroup.get(key).errors["required"] && theFormGroup.get(key).touched' class="text-danger">*</span>
+        <textarea rows="5"
+               id={{key}}
+               formControlName={{key}}
+               placeholder={{data.spec[key].placeholder||key}}
+               class="form-control"></textarea>
+           <span
+             *ngIf='theFormGroup.get(key).errors && theFormGroup.get(key).errors["required"] && theFormGroup.get(key).touched'
+             class="help-block">{{data.spec[key].label}} is required</span>
+          <span
+            *ngIf='theFormGroup.get(key).errors && theFormGroup.get(key).errors["email"] && theFormGroup.get(key).touched'
+            class="help-block">{{data.spec[key].label}} is not valid email</span>
+      </div>
+      <!-- end-textarea -->
+
+      <!--<input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event" type="date" name="startDate"/>-->
+
+      <!-- datepicker -->
+      <div *ngSwitchCase="'datepicker'" [class]="data.spec[key].class ||'form-group col-xs-12 col-sm-6 col-md-4 col-lg-3'" [ngClass]="{'has-error': theFormGroup.get(key).errors && theFormGroup.get(key).touched}">
+        <label for={{key}}>{{data.spec[key].label}}</label>
+        <my-date-picker id={{key}} [options]="myDatePickerOptions"
+                      formControlName={{key}}></my-date-picker>
+      </div>
+      <!-- end-datepicker -->
+
+
+      <!-- autocomplete -->
+      <!--  <div *ngSwitchCase="'autocomplete'" [class]="data.spec[key].class ||'form-group col-xs-12 col-sm-6 col-md-4 col-lg-3'" [ngClass]="{'has-error': theFormGroup.get(key).errors && theFormGroup.get(key).touched}">
+         <label for={{key}}>{{data.spec[key].label}}</label>
+         <div class="col-sm-5">
+           <input  ngui-auto-complete
+                   formControlName={{key}}
+                   [source]="continents"
+                   [list-formatter]="autocompleListFormatter"
+                   value-property-name="optionItem.key"
+                   display-property-name="optionItem.name"
+                   placeholder="Contients"
+                   class="form-control">
+         </div>
+       </div>
+       end-autocomplete -->
+
+       <!--fw-textbox data-ng-switch-case="textbox" [data]="{value: data.value, formGroup: theFormGroup, spec: data.spec[key]}"></fw-textbox>-->
+
+        <!--<fw-radio [ngSwitchCase]="radio" [data]="{value: data.value, formGroup: data.formGroup, spec: data.spec}"></fw-radio>-->
+
+        <!--<fw-checkbox [ngSwitchCase]="radio" [data]="{value: data.value, formGroup: data.formGroup, spec: data.spec}"></fw-checkbox>-->
+
+        <!--<fw-dropdown [ngSwitchCase]="dropdown" [data]="{value: data.value, formGroup: data.formGroup, spec: data.spec}"></fw-dropdown>-->
+
+        <!--<fw-text-area [ngSwitchCase]="textarea" [data]="{value: data.value, formGroup: data.formGroup, spec: data.spec}"></fw-text-area>-->
+
+        <!--<fw-date-textbox [ngSwitchCase]="datedropdown" [data]="{value: data.value, formGroup: data.formGroup, spec: data.spec}"></fw-date-textbox>-->
+
+        <!--<fw-cascade-dropdown [ngSwitchCase]="cascadedropdown" [data]="{value: data.value, formGroup: data.formGroup, spec: data.spec}"></fw-cascade-dropdown>-->
+
+        <!--<fw-typeahead [ngSwitchCase]="typeahead" [data]="{value: data.value, formGroup: data.formGroup, spec: data.spec}"></fw-typeahead>-->
+
+    </div>
+
+    </ng-template>
+    <br>
+    <div class="row">
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+  </div>
+</form>

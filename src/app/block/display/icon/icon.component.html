@@ -1,0 +1,2 @@
+<span *ngIf="imgUrlFunc() || data.imgUrl"><img [src]="imgUrlFunc() || data.imgUrl" [alt]="imgAltFunc() || data.imgAlt" [class]="data.imgClass" height={{data.imgHeight}}  width={{data.imgWidth}} (click)="clickFunction()"/></span>
+<span *ngIf="iconClassFunc() || data.iconClass"><i [class]="iconClassFunc() || data.iconClass" (click)="clickFunction()"></i></span>
